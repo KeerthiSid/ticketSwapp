@@ -107,6 +107,7 @@
     </div>
 
     <script>
+        const backendUrl = 'https://ticket-backend-9z7d1ng3v-keerthi-siddeshwars-projects.vercel.app';
         const sellTicketForm = document.getElementById('sellTicketForm');
         const ticketList = document.getElementById('ticketList');
         const sellerInfoModal = document.getElementById('sellerInfoModal');
@@ -125,7 +126,7 @@
 
         // Fetch tickets from the server and display them
         async function fetchTickets() {
-            const response = await fetch('https://ticket-backend-ikhky7cu3-keerthi-siddeshwars-projects.vercel.app/api/tickets');
+            const response = await fetch(`${backendUrl}/api/tickets`);
             const tickets = await response.json();
             updateTicketList(tickets);
         }
@@ -165,7 +166,7 @@
             currentTicket.sellerEmail = sellerEmail;
             currentTicket.sellerPhone = sellerPhone;
 
-            const response = await fetch('https://ticket-backend-ikhky7cu3-keerthi-siddeshwars-projects.vercel.app/api/tickets', {
+            const response = await fetch(`${backendUrl}/api/tickets`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -224,7 +225,7 @@
             const buyerEmail = document.getElementById('buyerEmail').value;
             const buyerPhone = document.getElementById('buyerPhone').value;
 
-            const ticket = await fetch(`https://ticket-backend-ikhky7cu3-keerthi-siddeshwars-projects.vercel.app/api/tickets/${currentTicket}`)
+            const ticket = await fetch(`${backendUrl}/api/tickets/${currentTicket}`)
                 .then(response => response.json());
 
             const isLastMinuteDeal = isLastMinute(ticket.eventDate);
@@ -236,7 +237,7 @@
             Email: ${buyerEmail}
             Phone: ${buyerPhone}`);
 
-            await fetch(`https://ticket-backend-ikhky7cu3-keerthi-siddeshwars-projects.vercel.app/api/tickets/${currentTicket}`, {
+            await fetch(`${backendUrl}/api/tickets/${currentTicket}`, {
                 method: 'DELETE'
             });
 
